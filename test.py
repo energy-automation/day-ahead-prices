@@ -1,6 +1,6 @@
 import datetime
 
-import dayaheadprices.entsoe as entsoe
+import dayaheadprices.edge_entsoe as entsoe
 
 delivery_date = datetime.datetime.today()
 delivery_date += datetime.timedelta(days=0)
