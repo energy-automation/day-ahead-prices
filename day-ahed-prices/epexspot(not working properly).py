@@ -43,13 +43,13 @@ def retrieve_prices(offset):
     html = browser.page_source
 
     # Write html content to disk for testing and debugging if needed. Also close the browser.
-    with open('content.txt', 'w') as f:
+    with open('../content.txt', 'w') as f:
         f.write(html)
 
     browser.quit()
 
     # Read the content of the file. Look redundant, but now you can just comment out all the code above and debug.
-    with open('content.txt', 'r') as f:
+    with open('../content.txt', 'r') as f:
         html = f.readlines()
     html = ''.join(html)
     html = html.replace('\n', '')
