@@ -1,14 +1,14 @@
 from setuptools import setup
 
 setup(
-    name='day-ahead-prices',
+    name='dayaheadprices',
     version='0.1.0',
     description='Download hourly electricity prices directly from auction houses',
     url='https://github.com/energy-automation/day-ahead-prices',
     author='Krakkus',
     author_email='krakkus@outlook.com',
     license='MIT',
-    packages=['day-ahead-prices'],
+    packages=['dayaheadprices'],
     install_requires=[],
 
     classifiers=[
