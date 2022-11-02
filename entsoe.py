@@ -7,22 +7,19 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
 # The url where day-ahead prices can be found. There are two tokens in the url, to be replaced at runtime
-entsoe_url = "view-source:https://transparency.entsoe.eu/transmission-domain/r2/dayAheadPrices/show?name=&defaultValue=false&viewType=TABLE&areaType=BZN&atch=false&dateTime.dateTime=_DELIVERY_+00:00|CET|DAY&biddingZone.values=CTY|10YNL----------L!BZN|10YNL----------L&resolution.values=PT60M&dateTime.timezone=CET_CEST&dateTime.timezone_input=CET+(UTC+1)+/+CEST+(UTC+2)"
+entsoe_url = "https://transparency.entsoe.eu/transmission-domain/r2/dayAheadPrices/show?name=&defaultValue=false&viewType=TABLE&areaType=BZN&atch=false&dateTime.dateTime={0}+00:00|CET|DAY&biddingZone.values=CTY|{1}----------L!BZN|{1}----------L&resolution.values=PT60M&dateTime.timezone=CET_CEST&dateTime.timezone_input=CET+(UTC+1)+/+CEST+(UTC+2)"
 
-# Store browser and string
-glob = dict()
 
 # Returns a datestring formated to the need of the website. The offset days after or before today
 def entsoe_date_str(dt):
     return dt.strftime('%d.%m.%Y')
 
 
-def retrieve_prices(delivery_date):
-    browser = glob['driver']
+def retrieve_prices(delivery_date, what):
+    browser = webdriver.Edge()
 
-    # Build url to visit, if offset is left at zero then trade day is today and delivery tomorrow.
-    url = entsoe_url
-    url = url.replace('_DELIVERY_', entsoe_date_str(delivery_date))
+    # Build url to visit
+    url = entsoe_url.format(entsoe_date_str(delivery_date), what)
 
     # Print the url and fetch its content
     print(f'Final url: {url}')
@@ -41,17 +38,22 @@ def retrieve_prices(delivery_date):
     html = ''.join(html)
     html = html.replace('\n', '')
 
-    if glob['browser'] == 'chrome':
+    # Extract the list of prices
+    pattern = 'data-view-detail-link<\/span>"&gt;<\/span>(.*?)<span'
+    matches = re.findall(pattern, html)
+
+    if len(matches) == 24:
+        print(pattern)
+    else:
         pattern = ';" class="data-view-detail-link">(.*?)<\/span'
         matches = re.findall(pattern, html)
 
-    if glob['browser'] == 'edge':
-        pattern = 'data-view-detail-link<\/span>"&gt;<\/span>(.*?)<span'
-        matches = re.findall(pattern, html)
+    if len(matches) == 24:
+        print(pattern)
 
     # Display all the matches
-    for m in matches:
-        print(m)
+    # for m in matches:
+    #     print(m)
 
     # Make sure there are exactly 24 prices
     assert (len(matches) == 24)
@@ -61,11 +63,8 @@ def retrieve_prices(delivery_date):
 
 
 if __name__ == '__main__':
-    glob['browser'] = 'edge'
-    glob['driver'] = webdriver.Edge()
-
     delivery_date = datetime.datetime.today()
     delivery_date += datetime.timedelta(days=0)
 
-    price_list = retrieve_prices(delivery_date)
+    price_list = retrieve_prices(delivery_date, '10YNL')
     print(list(price_list))
