@@ -1,4 +1,4 @@
-# Day ahead prices
+# Day ahead prices (not working!!, don't use)
 
 Hourly energy rates are becoming more important every year. For my own project I needed to know the actual realtime price of electricity.
 
