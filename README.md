@@ -1,4 +1,4 @@
-# Day ahead prices (not working!!, don't use)
+# Day ahead prices
 
 Hourly energy rates are becoming more important every year. For my own project I needed to know the actual realtime price of electricity.
 
@@ -14,3 +14,14 @@ To update:
 
     pip install https://github.com/energy-automation/day-ahead-prices/archive/refs/heads/main.zip --upgrade
 
+# Example
+
+    import datetime
+    
+    import dayaheadprices.entsoe as entsoe
+    
+    delivery_date = datetime.datetime.today()
+    delivery_date += datetime.timedelta(days=0)
+    
+    price_list = entsoe.retrieve_prices(delivery_date, '10YNL')
+    print(list(price_list))

@@ -62,9 +62,3 @@ def retrieve_prices(delivery_date, what):
     return [float(i) for i in matches]
 
 
-if __name__ == '__main__':
-    delivery_date = datetime.datetime.today()
-    delivery_date += datetime.timedelta(days=0)
-
-    price_list = retrieve_prices(delivery_date, '10YNL')
-    print(list(price_list))
