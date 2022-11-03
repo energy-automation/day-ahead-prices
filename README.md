@@ -23,7 +23,7 @@ To update:
     import dayaheadprices.chrome_entsoe as entsoe
     
     delivery_date = datetime.datetime.today()
-    delivery_date += datetime.timedelta(days=0)
+    #delivery_date += datetime.timedelta(days=1)
     
     price_list = entsoe.retrieve_prices(delivery_date, '10YNL')
     print(list(price_list))
