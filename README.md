@@ -2,7 +2,7 @@
 
 ![Day ahead prices from the Entsoe website](http://energyautomation.tech/wp-content/uploads/2022/11/2022-11-03.png)
 
-Hourly energy rates are becoming more important every year. For my own project I needed to know the actual realtime price of electricity.
+Hourly energy rates are becoming more important every year. For my own [project](https://energyautomation.tech/posts/how-to-create-a-smart-switch-for-an-electric-boiler-to-save-money/) I needed to know the actual realtime price of electricity.
 
 I decided to create a module to retrieve the rates from one of the energy exchanges. And then I added another for backup.
 
