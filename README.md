@@ -25,7 +25,7 @@ To update:
     delivery_date = datetime.datetime.today()
     delivery_date += datetime.timedelta(days=0)
     
-    price_list = chrome_entsoe.retrieve_prices(delivery_date, '10YNL')
+    price_list = entsoe.retrieve_prices(delivery_date, '10YNL')
     print(list(price_list))
 
 If all goes well the result will be an array containing 24 prices for each hour of the specified day.
